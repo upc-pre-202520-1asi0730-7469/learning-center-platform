@@ -12,7 +12,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
     /// <summary>
     /// Configures the database context options.
     /// </summary>
-    /// <param name="builder">The options builder.</param>
+    /// <param name="builder">The options' builder.</param>
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
         // Automatically set CreatedDate and UpdatedDate for entities
