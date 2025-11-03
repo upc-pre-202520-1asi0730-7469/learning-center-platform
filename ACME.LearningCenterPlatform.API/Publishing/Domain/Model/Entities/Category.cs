@@ -1,3 +1,4 @@
+using ACME.LearningCenterPlatform.API.Publishing.Domain.Model.Aggregate;
 using ACME.LearningCenterPlatform.API.Publishing.Domain.Model.Commands;
 
 namespace ACME.LearningCenterPlatform.API.Publishing.Domain.Model.Entities;
@@ -9,6 +10,8 @@ public class Category
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    
+    public List<Tutorial> Tutorials { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Category"/> class.
@@ -16,13 +19,14 @@ public class Category
     public Category()
     {
         Name = string.Empty;
+        Tutorials = [];
     }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Category"/> class with the specified name.
     /// </summary>
     /// <param name="name">The name of the category.</param>
-    public Category(string name)
+    public Category(string name) : this()
     {
         Name = name;
     }
@@ -31,7 +35,7 @@ public class Category
     /// Initializes a new instance of the <see cref="Category"/> class using a CreateCategoryCommand.
     /// </summary>
     /// <param name="command">The <see cref="CreateCategoryCommand"/> command containing the category details.</param>
-    public Category(CreateCategoryCommand command)
+    public Category(CreateCategoryCommand command) : this()
     {
         Name = command.Name;
     }
