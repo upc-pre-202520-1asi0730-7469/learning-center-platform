@@ -1,3 +1,4 @@
+using ACME.LearningCenterPlatform.API.IAM.Application.ACL.Services;
 using ACME.LearningCenterPlatform.API.IAM.Application.Internal.CommandServices;
 using ACME.LearningCenterPlatform.API.IAM.Application.Internal.OutboundServices;
 using ACME.LearningCenterPlatform.API.IAM.Application.Internal.QueryServices;
@@ -8,7 +9,6 @@ using ACME.LearningCenterPlatform.API.IAM.Infrastructure.Persistence.EFC.Reposit
 using ACME.LearningCenterPlatform.API.IAM.Infrastructure.Tokens.JWT.Configuration;
 using ACME.LearningCenterPlatform.API.IAM.Infrastructure.Tokens.JWT.Services;
 using ACME.LearningCenterPlatform.API.IAM.Interfaces.ACL;
-using ACME.LearningCenterPlatform.API.IAM.Interfaces.ACL.Services;
 
 namespace ACME.LearningCenterPlatform.API.IAM.Infrastructure.Interfaces.ASP.Configuration.Extensions;
 

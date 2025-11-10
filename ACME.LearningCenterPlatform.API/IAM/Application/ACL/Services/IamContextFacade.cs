@@ -1,8 +1,9 @@
 using ACME.LearningCenterPlatform.API.IAM.Domain.Model.Commands;
 using ACME.LearningCenterPlatform.API.IAM.Domain.Model.Queries;
 using ACME.LearningCenterPlatform.API.IAM.Domain.Services;
+using ACME.LearningCenterPlatform.API.IAM.Interfaces.ACL;
 
-namespace ACME.LearningCenterPlatform.API.IAM.Interfaces.ACL.Services;
+namespace ACME.LearningCenterPlatform.API.IAM.Application.ACL.Services;
 
 public class IamContextFacade(IUserCommandService userCommandService, IUserQueryService userQueryService)
     : IIamContextFacade
