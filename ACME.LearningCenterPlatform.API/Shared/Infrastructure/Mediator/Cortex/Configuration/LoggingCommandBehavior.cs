@@ -3,7 +3,7 @@ using Cortex.Mediator.Commands;
 namespace ACME.LearningCenterPlatform.API.Shared.Infrastructure.Mediator.Cortex.Configuration;
 
 /// <summary>
-/// Logging behavior for commands
+///     Logging behavior for commands
 /// </summary>
 public class LoggingCommandBehavior<TCommand> : ICommandPipelineBehavior<TCommand> where TCommand : ICommand
 {
