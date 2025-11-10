@@ -9,12 +9,12 @@ using ACME.LearningCenterPlatform.API.Profiles.Interfaces.ACL;
 namespace ACME.LearningCenterPlatform.API.Profiles.Infrastructure.Interfaces.ASP.Configuration.Extensions;
 
 /// <summary>
-///    Extension methods for configuring Profiles context services in a WebApplicationBuilder.
+///     Extension methods for configuring Profiles context services in a WebApplicationBuilder.
 /// </summary>
 public static class WebApplicationBuilderExtensions
 {
     /// <summary>
-    ///   Adds the Profiles context services to the WebApplicationBuilder.
+    ///     Adds the Profiles context services to the WebApplicationBuilder.
     /// </summary>
     /// <param name="builder">The WebApplicationBuilder to configure.</param>
     public static void AddProfilesContextServices(this WebApplicationBuilder builder)
@@ -29,6 +29,5 @@ public static class WebApplicationBuilderExtensions
         builder.Services.AddScoped<IProfileCommandService, ProfileCommandService>();
         builder.Services.AddScoped<IProfileQueryService, ProfileQueryService>();
         builder.Services.AddScoped<IProfilesContextFacade, ProfilesContextFacade>();
-
     }
-} 
+}
