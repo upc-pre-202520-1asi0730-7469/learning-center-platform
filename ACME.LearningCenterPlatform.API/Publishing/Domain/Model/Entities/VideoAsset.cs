@@ -4,8 +4,6 @@ namespace ACME.LearningCenterPlatform.API.Publishing.Domain.Model.Entities;
 
 public class VideoAsset : Asset
 {
-    public Uri? VideoUri { get; private set; }
-
     public VideoAsset() : base(EAssetType.Video)
     {
         VideoUri = null;
@@ -15,6 +13,8 @@ public class VideoAsset : Asset
     {
         VideoUri = new Uri(videoUrl);
     }
+
+    public Uri? VideoUri { get; }
 
     public override bool Readable => false;
     public override bool Viewable => true;

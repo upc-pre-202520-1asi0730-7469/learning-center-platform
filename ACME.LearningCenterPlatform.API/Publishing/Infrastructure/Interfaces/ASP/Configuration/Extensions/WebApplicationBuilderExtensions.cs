@@ -7,12 +7,12 @@ using ACME.LearningCenterPlatform.API.Publishing.Infrastructure.Persistence.EFC.
 namespace ACME.LearningCenterPlatform.API.Publishing.Infrastructure.Interfaces.ASP.Configuration.Extensions;
 
 /// <summary>
-///    Extension methods for configuring Publishing context services in a WebApplicationBuilder.
+///     Extension methods for configuring Publishing context services in a WebApplicationBuilder.
 /// </summary>
 public static class WebApplicationBuilderExtensions
 {
     /// <summary>
-    ///   Adds the Publishing context services to the WebApplicationBuilder.
+    ///     Adds the Publishing context services to the WebApplicationBuilder.
     /// </summary>
     /// <param name="builder"></param>
     public static void AddPublishingContextServices(this WebApplicationBuilder builder)
@@ -31,4 +31,4 @@ public static class WebApplicationBuilderExtensions
         builder.Services.AddScoped<ITutorialCommandService, TutorialCommandService>();
         builder.Services.AddScoped<ITutorialQueryService, TutorialQueryService>();
     }
-} 
+}

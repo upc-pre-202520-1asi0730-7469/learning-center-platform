@@ -4,17 +4,12 @@ using ACME.LearningCenterPlatform.API.Publishing.Domain.Model.Commands;
 namespace ACME.LearningCenterPlatform.API.Publishing.Domain.Model.Entities;
 
 /// <summary>
-/// Represents a category entity in the publishing domain.
+///     Represents a category entity in the publishing domain.
 /// </summary>
 public class Category
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    
-    public List<Tutorial> Tutorials { get; }
-
     /// <summary>
-    /// Initializes a new instance of the <see cref="Category"/> class.
+    ///     Initializes a new instance of the <see cref="Category" /> class.
     /// </summary>
     public Category()
     {
@@ -23,7 +18,7 @@ public class Category
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Category"/> class with the specified name.
+    ///     Initializes a new instance of the <see cref="Category" /> class with the specified name.
     /// </summary>
     /// <param name="name">The name of the category.</param>
     public Category(string name) : this()
@@ -32,11 +27,16 @@ public class Category
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Category"/> class using a CreateCategoryCommand.
+    ///     Initializes a new instance of the <see cref="Category" /> class using a CreateCategoryCommand.
     /// </summary>
-    /// <param name="command">The <see cref="CreateCategoryCommand"/> command containing the category details.</param>
+    /// <param name="command">The <see cref="CreateCategoryCommand" /> command containing the category details.</param>
     public Category(CreateCategoryCommand command) : this()
     {
         Name = command.Name;
     }
+
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public List<Tutorial> Tutorials { get; }
 }

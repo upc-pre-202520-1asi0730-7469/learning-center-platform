@@ -7,15 +7,15 @@ public partial class Asset(EAssetType type) : IPublishable
     public int Id { get; }
 
     public AcmeAssetIdentifier AssetIdentifier { get; private set; } = new();
-    
+
     public EPublishingStatus Status { get; private set; } = EPublishingStatus.Draft;
-    
+
     public EAssetType Type { get; private set; } = type;
-    
+
     public virtual bool Readable => false;
-    
+
     public virtual bool Viewable => false;
-    
+
     public void SendToEdit()
     {
         Status = EPublishingStatus.ReadyToEdit;
