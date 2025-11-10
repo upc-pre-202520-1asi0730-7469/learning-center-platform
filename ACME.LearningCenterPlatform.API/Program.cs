@@ -1,11 +1,12 @@
+using ACME.LearningCenterPlatform.API.IAM.Infrastructure.Interfaces.ASP.Configuration.Extensions;
+using ACME.LearningCenterPlatform.API.IAM.Infrastructure.Pipeline.Middleware.Extensions;
 using ACME.LearningCenterPlatform.API.Profiles.Infrastructure.Interfaces.ASP.Configuration.Extensions;
 using ACME.LearningCenterPlatform.API.Publishing.Infrastructure.Interfaces.ASP.Configuration.Extensions;
+using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Documentation.OpenApi.Configuration.Extensions;
 using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Interfaces.ASP.Configuration.Extensions;
 using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Mediator.Cortex.Configuration.Extensions;
-using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
+using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,80 +14,31 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers(options => options.Conventions.Add(new KebabCaseRouteNamingConvention()));
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// Add Database Services
+builder.AddDatabaseServices();
 
-if (connectionString == null) throw new InvalidOperationException("Connection string not found.");
+// Add OpenAPI Documentation Services
+builder.AddOpenApiDocumentationServices();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    if (builder.Environment.IsDevelopment())
-        options.UseMySQL(connectionString)
-            .LogTo(Console.WriteLine, LogLevel.Information)
-            .EnableSensitiveDataLogging()
-            .EnableDetailedErrors();
-    else if (builder.Environment.IsProduction())
-        options.UseMySQL(connectionString)
-            .LogTo(Console.WriteLine, LogLevel.Error);
-});
-
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddOpenApi();
-builder.Services.AddSwaggerGen(options =>
-{
-    
-    options.SwaggerDoc("v1",
-        new OpenApiInfo
-        {
-            Title = "ACME.LearningCenterPlatform.API",
-            Version = "v1",
-            Description = "ACME Learning Center Platform API",
-            TermsOfService = new Uri("https://acme-learning.com/tos"),
-            Contact = new OpenApiContact
-            {
-                Name = "ACME Studios",
-                Email = "contact@acme.com"
-            },
-            License = new OpenApiLicense
-            {
-                Name = "Apache 2.0",
-                Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
-            }
-        });
-    options.EnableAnnotations();
-});
-
+// Bounded Context Services Registration
 builder.AddSharedContextServices();
 builder.AddPublishingContextServices();
 builder.AddProfilesContextServices();
+builder.AddIamContextServices();
 
+// Add Cortex Mediator Services and Middleware
 builder.AddCortexMediatorMiddleware();
 
 var app = builder.Build();
 
-
 // Verify if the database exists and create it if it doesn't
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<AppDbContext>();
-
-    context.Database.EnsureCreated();
-}
-
+app.UseDatabaseCreationAssurance();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
+app.UseOpenApiDocumentation();
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
+app.UseRequestAuthorization();
 app.MapControllers();
-
 app.Run();
