@@ -61,7 +61,7 @@ public static class WebApplicationBuilderExtensions
     {
         builder.Services.AddCors(options =>
         {
-            options.AddPolicy("AllowAll",
+            options.AddPolicy("AllowAllPolicy",
                 policy =>
                 {
                     policy.AllowAnyOrigin()
